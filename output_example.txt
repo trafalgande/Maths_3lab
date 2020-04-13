@@ -1,0 +1,14 @@
+-->Half Separation Method: 
+ x = -0.7501220703125
+ f(x) = 0.003324189929335475
+ Iterations: 15
+
+-->Secant Method: 
+ x = -0.7505081385585306
+ f(x) = -3.5974866730015265E-7
+ Iterations: 11
+
+-->Simple Iteration Method: 
+ x = -0.7550765081348058
+ f(x) = -0.03947657333380228
+ Iterations: 27
