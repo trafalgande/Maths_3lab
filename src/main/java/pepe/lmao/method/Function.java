@@ -1,6 +1,5 @@
 package pepe.lmao.method;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 
 public class Function {
 
