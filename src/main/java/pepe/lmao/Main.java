@@ -59,7 +59,7 @@ public class Main {
                 function.solve(lower, upper, eps);
                 break;
             default:
-                System.out.println("Unexpected value: " + inputChosenOption);
+                System.out.println("Unexpected value: " + outputChosenOption);
                 break;
         }
 
