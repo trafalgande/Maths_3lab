@@ -1,32 +1,34 @@
 package pepe.lmao.chart;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 import pepe.lmao.method.Function;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Map;
+import java.util.TreeMap;
 
-import javax.swing.*;
-
-public class XYChart extends JFrame {
+public class XYChart {
     Function function = new Function();
-    final XYSeries series = new XYSeries("Function");
-    final XYSeriesCollection dataset = new XYSeriesCollection();
 
-    public XYPlot plot(double lower, double upper) {
+    final TreeMap<Integer, Double> set = new TreeMap<>();
+    public void plot(double lower, double upper) throws IOException {
         for (int i = (int) lower; i < upper; i++) {
-            series.add(i, function.f(i));
+            set.put(i, function.f(i));
         }
-
-        dataset.addSeries(series);
-        JFreeChart chart = ChartFactory.createXYLineChart("Function", "x", "y", dataset);
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        setContentPane(chartPanel);
-        XYPlot plot = chart.getXYPlot();
-        plot.setForegroundAlpha(0.5f);
-        return plot;
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Integer, Double> entry : set.entrySet()) {
+            sb.append(entry.getKey()).append(",").append(entry.getValue()).append(" ");
+        }
+        String script = "python plot.py " + sb.toString();
+        File file = new File("script.sh");
+        Files.write(Paths.get(String.valueOf(file)), script.getBytes());
+        ProcessBuilder builder = new ProcessBuilder().command("sh ./script.sh".split(" "));
+        try {
+            Process process = builder.start();
+            process.waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

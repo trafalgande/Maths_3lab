@@ -65,8 +65,8 @@ public class Main {
 
         XYChart xyChart = new XYChart();
         xyChart.plot(lower, upper);
-        xyChart.pack();
-        xyChart.setVisible(true);
+
+
     }
 
     private static String filename = "";

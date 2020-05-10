@@ -13,7 +13,7 @@ public class Secant {
             x.add(0, lower);
         else
             x.add(0, upper);
-        x.add(1, x.get(0) - x.get(0) / 10);
+        x.add(1, x.get(0) + x.get(0) / 10);
         int i = 1;
         while (Math.abs(x.get(i - 1) - x.get(i)) > eps) {
             x.add(i + 1, x.get(i) - (x.get(i) - x.get(i - 1)) / (function.f(x.get(i)) - function.f(x.get(i - 1))) * function.f(x.get(i)));
